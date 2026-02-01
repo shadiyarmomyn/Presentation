@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перинаталдық көмек: Толық интерактивті талдау</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; scroll-behavior: smooth; }
+        .gradient-teal { background: linear-gradient(135deg, #005f73, #0a9396); }
+        .chart-container { position: relative; width: 100%; height: 350px; }
+        .medical-card { transition: all 0.3s ease; border: 1px solid #e2e8f0; }
+        .medical-card:hover { transform: translateY(-5px); border-color: #0a9396; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+        .timeline-item { position: relative; padding-left: 50px; margin-bottom: 30px; }
+        .timeline-marker { position: absolute; left: 11px; top: 5px; width: 20px; height: 20px; border-radius: 50%; background: #0a9396; border: 4px solid #fff; box-shadow: 0 0 0 2px #0a9396; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-40 h-10 gradient-teal rounded-xl flex items-center justify-center text-white font-bold shadow-lg text-xl">ЖМ 20-24</div>
+                    <span class="font-bold text-xl text-slate-800 tracking-tight">Момын <span class="text-teal-600">Шадияр</span></span>
+                </div>
+                <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#intro" class="hover:text-teal-600 transition-colors">Кіріспе</a>
+                    <a href="#stats" class="hover:text-teal-600 transition-colors">Статистика</a>
+                    <a href="#antenatal" class="hover:text-teal-600 transition-colors">Антенаталдық</a>
+                    <a href="#birth" class="hover:text-teal-600 transition-colors">Босану</a>
+                    <a href="#bundles" class="hover:text-teal-600 transition-colors">Хаттамалар</a>
+                    <a href="#mastitis" class="hover:text-teal-600 transition-colors">Мастит</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- Hero Section -->
+        <section id="intro" class="text-center space-y-8 py-10">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-teal-50 text-teal-700 text-xs font-bold rounded-full uppercase tracking-widest border border-teal-100">
+                <span>Қожа Ахмет Ясауи атындағы Халықаралық қазақ-түрік университеті</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight">
+                Перинаталдық көмек: <br>
+                <span class="text-transparent bg-clip-text gradient-teal">Заманауи Тәсілдер</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-xl text-slate-500 font-light leading-relaxed">
+                 Жүкті әйелдерді антенаталдық бақылау, босануға дайындау, босанғаннан кейінгі кезінде   әйелдерді бақылау
+            </p>
+            <div class="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
+                    <div class="text-3xl font-bold text-teal-600">8</div>
+                    <div class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mt-1">Байланыс моделі</div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
+                    <div class="text-3xl font-bold text-rose-600">10.0</div>
+                    <div class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mt-1">Ана өлімі (2023)</div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
+                    <div class="text-3xl font-bold text-amber-600">31.8%</div>
+                    <div class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mt-1">Емшек сүті</div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
+                    <div class="text-3xl font-bold text-blue-600">99.2%</div>
+                    <div class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mt-1">Институттық босану</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Statistics -->
+        <section id="stats" class="scroll-mt-24 bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900">Қазақстандағы Денсаулық Индикаторлары (MICS-2024)</h2>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl">
+                            <h4 class="font-bold text-teal-800">Ана өлімі</h4>
+                            <p class="text-sm text-slate-600">2000 жылы 68.0 болса, 2023 жылы 10.0-ге дейін төмендеді (6.8 есе).</p>
+                        </div>
+                        <div class="p-4 bg-amber-50 rounded-2xl">
+                            <h4 class="font-bold text-amber-800">Емшек сүтімен қоректендіру</h4>
+                            <p class="text-sm text-slate-600">6 айға дейінгі нәрестелердің тек 31.8%-ы ғана тек емшек сүтін алады. Бұл төмен көрсеткіш.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-2xl">
+                            <h4 class="font-bold text-blue-800">Босануға көмек</h4>
+                            <p class="text-sm text-slate-600">99.2% әйелдер медициналық мекемелерде босанады, бұл білікті медициналық көмекке қолжетімділіктің жоғары екенін білдіреді.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container" id="chart-parent">
+                    <canvas id="kzStatsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Antenatal Care (8 Contacts) -->
+        <section id="antenatal" class="scroll-mt-24 space-y-12">
+            <div class="max-w-3xl">
+                <h2 class="text-3xl font-bold text-slate-900">Антенаталдық бақылау: ДДҰ жаңа моделі</h2>
+                <p class="text-lg text-slate-500 mt-4">ДДҰ жүкті әйелдер үшін кемінде 8 медициналық байланыс жасауды ұсынады. Бұл "оң жүктілік тәжірибесін" қалыптастыруға арналған.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="medical-card bg-white p-6 rounded-3xl">
+                    <div class="text-teal-600 font-bold mb-2">1-байланыс</div>
+                    <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">12 аптаға дейін</div>
+                    <p class="text-sm text-slate-600">Жүктілікті ерте анықтау, қауіп факторларын бағалау және психологиялық қолдау.</p>
+                </div>
+                <div class="medical-card bg-white p-6 rounded-3xl">
+                    <div class="text-teal-600 font-bold mb-2">2-байланыс</div>
+                    <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">20 апта</div>
+                    <p class="text-sm text-slate-600">Ұрық аномалияларын скринингтеу және ана денсаулығын мониторингтеу.</p>
+                </div>
+                <div class="medical-card bg-white p-6 rounded-3xl">
+                    <div class="text-teal-600 font-bold mb-2">3-6 байланыстар</div>
+                    <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">26 - 34 апта</div>
+                    <p class="text-sm text-slate-600">Диабет скринингі (ГТТ), темір тапшылығын бақылау, преэклампсия профилактикасы.</p>
+                </div>
+                <div class="medical-card bg-white p-6 rounded-3xl">
+                    <div class="text-teal-600 font-bold mb-2">7-8 байланыстар</div>
+                    <div class="text-xs text-slate-400 mb-4 uppercase tracking-wider">36 - 40 апта</div>
+                    <p class="text-sm text-slate-600">Босану тактикасын анықтау, психопрофилактикалық дайындық, босану жоспары.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Labor and Birth -->
+        <section id="birth" class="scroll-mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="bg-teal-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
+                <div class="relative z-10 space-y-6">
+                    <h2 class="text-3xl font-bold">Босану кезіндегі күтім</h2>
+                    <p class="text-teal-100/80">Медициналық араласуды азайтып, әйелдің жайлылығын арттыру — басты басымдық.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 bg-teal-400 rounded-full"></span>
+                            <span>Босану кезіндегі еркін қозғалыс және еркін позиция.</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 bg-teal-400 rounded-full"></span>
+                            <span>Серіктестік босануды қолдау (90%+ тиімділік).</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 bg-teal-400 rounded-full"></span>
+                            <span>"Алтын сағат": тері-теріге түйісу (нәрестемен алғашқы байланыс).</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full"></div>
+            </div>
+
+            <div class="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-6">
+                <h2 class="text-3xl font-bold text-slate-900">Босануға дайындық: Психопрофилактика</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-amber-100 p-2 rounded-lg text-amber-600 font-bold text-xs">A</div>
+                        <p class="text-sm text-slate-600">Қорқыныш-Күш-Ауыру циклын бұзу (Дик-Рид әдісі).</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-amber-100 p-2 rounded-lg text-amber-600 font-bold text-xs">B</div>
+                        <p class="text-sm text-slate-600">Тыныс алу жаттығулары мен босану кезіндегі релаксация.</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-amber-100 p-2 rounded-lg text-amber-600 font-bold text-xs">C</div>
+                        <p class="text-sm text-slate-600">Әйелдің өз күшіне сенімділігін арттыру (Ламаз әдісі).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Clinical Bundles (MOTIVE/FAST-M) -->
+        <section id="bundles" class="scroll-mt-24 space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-slate-900">Асқынулармен күресудің шұғыл алгоритмдері</h2>
+                <p class="text-slate-500 mt-2 italic">Ана өлімін азайтуға бағытталған заманауи "Bundle" тәсілдері.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- MOTIVE -->
+                <div class="p-8 bg-rose-50 rounded-[2rem] border border-rose-100">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-rose-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">M</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-rose-900 uppercase">MOTIVE</h3>
+                            <p class="text-rose-700 text-xs">Жатыр гипотониясын емдеу</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 text-sm">
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>Massage:</strong> Жатырды сыртқы массаждау.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>Oxytocics:</strong> Утеротониктерді (Окситоцин) енгізу.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>Tranexamic acid:</strong> Транексам қышқылын қолдану.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>IV fluids:</strong> Инфузиялық терапияны бастау.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>Vaginal exam:</strong> Қынапты тексеру.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-rose-200"><strong>Exam:</strong> Туу жолдарын мұқият қарау.</li>
+                    </ul>
+                </div>
+
+                <!-- FAST-M -->
+                <div class="p-8 bg-blue-50 rounded-[2rem] border border-blue-100">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">F</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-900 uppercase">FAST-M</h3>
+                            <p class="text-blue-700 text-xs">Аналық сепсисті басқару</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 text-sm">
+                        <li class="bg-white/60 p-3 rounded-xl border border-blue-200"><strong>Fluids:</strong> Агрессивті инфузиялық реанимация.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-blue-200"><strong>Antibiotics:</strong> Бірінші сағатта кең спектрлі антибиотиктер.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-blue-200"><strong>Source control:</strong> Инфекция ошағын жою.</li>
+                        <li class="bg-white/60 p-3 rounded-xl border border-blue-200"><strong>Transfer/Monitoring:</strong> Науқастың жағдайын бақылау.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Mastitis ABM #36 -->
+        <section id="mastitis" class="scroll-mt-24">
+            <div class="bg-slate-900 rounded-[3rem] p-10 lg:p-16 text-white">
+                <div class="max-w-4xl space-y-10">
+                    <div>
+                        <span class="text-teal-400 font-bold uppercase tracking-widest text-xs">Ғылыми төңкеріс</span>
+                        <h2 class="text-4xl font-bold mt-2 leading-tight">Мастит спектрін емдеу: <br>ABM №36 Протоколы (2022-2025)</h2>
+                        <p class="text-slate-400 mt-4">Ескі әдістер (жылыту, қатты массаж) тіннің зақымдануына және абсцесске әкеледі. Жаңа парадигма — физиологиялық жайлылық.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <h4 class="text-rose-400 font-bold">Не істеуге БОЛМАЙДЫ:</h4>
+                            <div class="space-y-3 text-slate-300">
+                                <div class="flex items-center space-x-2"><span>✕</span> <span>Агрессивті терең массаж жасау.</span></div>
+                                <div class="flex items-center space-x-2"><span>✕</span> <span>Ыстық компресс және жылу.</span></div>
+                                <div class="flex items-center space-x-2"><span>✕</span> <span>Кеудені шектен тыс жиі сауу.</span></div>
+                                <div class="flex items-center space-x-2"><span>✕</span> <span>Камфор майын қолдану.</span></div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h4 class="text-teal-400 font-bold">Қазіргі ұсыныстар (ABM):</h4>
+                            <div class="space-y-3 text-slate-100">
+                                <div class="flex items-center space-x-2"><span>✓</span> <span><strong>СУЫҚ компресс:</strong> ісінуді азайту үшін (Мұз).</span></div>
+                                <div class="flex items-center space-x-2"><span>✓</span> <span>Жеңіл лимфодренаждық массаж.</span></div>
+                                <div class="flex items-center space-x-2"><span>✓</span> <span>НПВС (Ибупрофен) — ауырсынуды басу.</span></div>
+                                <div class="flex items-center space-x-2"><span>✓</span> <span>Бала сұранысы бойынша емізу.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Summary -->
+        <section class="border-t border-slate-200 pt-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2 space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900">Түйіндеме</h2>
+                    <p class="text-slate-600 leading-relaxed italic">
+                        "Қазіргі перинаталдық көмек — бұл тек медициналық процедуралар емес, бұл әйелдің психологиялық жағдайын ескеретін, ғылыми дәлелденген (Evidence-based) тәсілдер жиынтығы. Біздің мақсатымыз — әрбір әйел мен нәресте үшін қауіпсіз әрі жайлы орта құру."
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-slate-200 rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-slate-900">Момын Шадияр Абиджанұлы</div>
+                            <div class="text-xs text-slate-500 uppercase tracking-widest">Зерттеуші, Интерн доктор</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-teal-50 p-8 rounded-3xl space-y-4">
+                    <h4 class="font-bold text-teal-900">Негізгі дереккөздер:</h4>
+                    <ul class="text-xs text-teal-800 space-y-2">
+                        <li>• WHO Recommendations: Intrapartum Care</li>
+                        <li>• UNICEF MICS 2024 Report (Kazakhstan)</li>
+                        <li>• ABM Protocol №36: Mastitis Spectrum</li>
+                        <li>• MOTIVE & FAST-M Clinical Updates 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-400 text-sm">© 2025 Интерактивті Медициналық Есеп. Қ.А.Ясауи атындағы ХҚТУ.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Kazakhstan Indicators
+        const kzData = {
+            labels: ['Антенаталдық (4+)', 'Институттық босану', 'Тек емшек сүті', 'Кесарь тілігі'],
+            datasets: [{
+                label: 'Көрсеткіш (%)',
+                data: [87.0, 99.2, 31.8, 15.9],
+                backgroundColor: [
+                    'rgba(10, 147, 150, 0.7)',
+                    'rgba(0, 95, 115, 0.7)',
+                    'rgba(238, 155, 0, 0.7)',
+                    'rgba(174, 32, 18, 0.7)'
+                ],
+                borderColor: ['#0a9396', '#005f73', '#ee9b00', '#ae2012'],
+                borderWidth: 2,
+                borderRadius: 15
+            }]
+        };
+
+        function startChartInit(retries = 10, interval = 500) {
+            if (typeof Chart !== 'undefined') {
+                const ctx = document.getElementById('kzStatsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: kzData,
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { 
+                                padding: 10,
+                                backgroundColor: '#1e293b',
+                                callbacks: { label: (c) => ` ${c.parsed.x}%` }
+                            }
+                        },
+                        scales: {
+                            x: { max: 100, grid: { display: false }, ticks: { font: { weight: 'bold' } } },
+                            y: { grid: { color: '#f1f5f9' }, ticks: { font: { size: 11 } } }
+                        }
+                    }
+                });
+            } else if (retries > 0) {
+                setTimeout(() => startChartInit(retries - 1, interval), interval);
+            } else {
+                const container = document.getElementById('chart-parent');
+                if (container) container.innerHTML = "<div class='text-rose-500 font-bold p-10'>Графиктерді жүктеу қатесі.</div>";
+            }
+        }
+
+        window.addEventListener('load', () => startChartInit());
+    </script>
+</body>
+</html>
